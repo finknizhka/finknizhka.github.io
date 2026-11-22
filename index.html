@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Счётная книга — учёт инвестиций и бюджета</title>
+<meta name="description" content="Личный журнал инвестиций и бюджета для Android. Все данные — только на вашем телефоне: без регистрации, серверов и интернета.">
+<!-- Пока книги не вышли в магазинах — не показывать в поиске (владелец, 22.11.2026); убрать вместе с robots.txt. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="img/icon-512.png">
+<!-- Страница для GitHub Pages (22.11.2026). Пишется руками; политику (privacy.html), значок и кадры
+     в img/ обновляет tools/store/pack.js. Ни внешних шрифтов, ни счётчиков: как и приложение,
+     страница ничего о посетителе не собирает. -->
+<style>
+  :root{ --paper:#F4EEDF; --card:#FBF7EC; --ink:#1E2B23; --soft:#5B685D; --brass:#8C6A2E; --rule:#CBC0A2;
+         --btn:#2B3F34; --btn-ink:#F4EEDF; }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#18231C; --card:#1E2B23; --ink:#ECE5D3; --soft:#A9B3A6; --brass:#C9A868; --rule:#3A4A3F;
+           --btn:#C9A868; --btn-ink:#18231C; }
+  }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:var(--paper); color:var(--ink);
+        font:17px/1.6 -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  .wrap{ max-width:960px; margin:0 auto; padding:0 16px; }
+  h1, h2, h3{ font-family:Georgia, 'Times New Roman', serif; font-weight:600; line-height:1.2; }
+  a{ color:var(--brass); }
+
+  .hero{ padding:56px 0 32px 0; text-align:center; }
+  .hero .icon{ width:72px; height:72px; border-radius:18px; display:block; margin:0 auto 18px auto; }
+  .hero h1{ font-size:clamp(34px, 7vw, 52px); margin:0; }
+  .hero .sub{ margin:6px 0 0 0; color:var(--brass); font-size:18px; letter-spacing:.02em; }
+  .hero .lead{ max-width:600px; margin:18px auto 0 auto; color:var(--soft); }
+  .stores{ display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin-top:28px; }
+  .btn{ display:inline-block; padding:13px 22px; border-radius:12px; text-decoration:none; font-weight:600;
+        background:var(--btn); color:var(--btn-ink); border:2px solid var(--btn); }
+  .btn.alt{ background:transparent; color:var(--ink); border-color:var(--rule); }
+  .btn:focus-visible{ outline:3px solid var(--brass); outline-offset:3px; }
+
+  .shots{ display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; margin:24px 0 8px 0; }
+  .shots img{ width:100%; height:auto; border-radius:14px; display:block; background:var(--card); }
+
+  section{ padding:28px 0; border-top:1px solid var(--rule); }
+  section h2{ font-size:26px; margin:0 0 18px 0; }
+  .grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:16px; }
+  .card{ background:var(--card); border:1px solid var(--rule); border-radius:14px; padding:18px 20px; }
+  .card h3{ font-size:19px; margin:0 0 6px 0; color:var(--brass); }
+  .card p{ margin:0; }
+  ul.safe{ margin:0; padding-left:22px; }
+  ul.safe li{ margin:6px 0; }
+
+  footer{ border-top:1px solid var(--rule); padding:24px 0 40px 0; color:var(--soft); font-size:15px; }
+  footer p{ margin:6px 0; }
+
+  @media (max-width:720px){
+    .hero{ padding-top:40px; }
+    .shots{ grid-template-columns:repeat(2, 1fr); gap:12px; }
+    .grid{ grid-template-columns:1fr; }
+    .btn{ width:100%; text-align:center; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <img class="icon" src="img/icon-512.png" width="72" height="72" alt="">
+    <h1>Счётная книга</h1>
+    <p class="sub">учёт инвестиций и бюджета</p>
+    <p class="lead">Личный журнал инвестора для Android. Всё, что вы вписываете, хранится только на вашем
+      телефоне — без регистрации, без серверов и без интернета.</p>
+    <div class="stores">
+      <a class="btn" href="https://www.rustore.ru/catalog/app/com.portfolioledger.app">Бесплатная — в RuStore</a>
+      <a class="btn alt" href="https://www.rustore.ru/catalog/app/com.portfolioledger.full">Полное издание — в RuStore</a>
+      <!-- Google Play — когда книга выйдет там:
+      <a class="btn alt" href="https://play.google.com/store/apps/details?id=com.portfolioledger.app">Google Play</a> -->
+    </div>
+  </header>
+
+  <div class="shots" aria-label="Как выглядит приложение">
+    <img src="img/screenshot-01.png" width="1080" height="1920" loading="lazy" alt="Весь портфель на одном экране: стоимость, доход и доходность">
+    <img src="img/screenshot-02.png" width="1080" height="1920" loading="lazy" alt="Окно месяца: что принёс месяц — взносы, рост, выплаты">
+    <img src="img/screenshot-05.png" width="1080" height="1920" loading="lazy" alt="Бюджет: карты, категории и план">
+    <img src="img/screenshot-07.png" width="1080" height="1920" loading="lazy" alt="Цель в сегодняшних деньгах: срок, шаги и напоминания">
+  </div>
+
+  <section>
+    <h2>Что умеет</h2>
+    <div class="grid">
+      <div class="card"><h3>Честная доходность</h3>
+        <p>Доходность ваших денег (XIRR) и портфеля (TWR), с учётом инфляции; сравнение со вкладом и индексом — словами.</p></div>
+      <div class="card"><h3>Месяц — живой картиной</h3>
+        <p>Раз в месяц впишите суммы или загрузите отчёт брокера — и видно, что принёс месяц: взносы, рост цен, выплаты.</p></div>
+      <div class="card"><h3>Бюджет — пальцем</h3>
+        <p>Кошельки и карты с остатком, план по категориям, копилки и виджет на рабочем столе.</p></div>
+      <div class="card"><h3>Цели и итоги</h3>
+        <p>Пассивный доход или накопление в сегодняшних деньгах, вехи пути, итоги года и дневник инвестора.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Данные — только у вас</h2>
+    <ul class="safe">
+      <li>У приложения нет разрешения на интернет: отправить ваши цифры куда-либо оно не может.</li>
+      <li>Нет регистрации, рекламы и аналитики.</li>
+      <li>Вход по PIN и отпечатку; бэкап файлом — можно с паролем.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p><a href="privacy.html">Политика конфиденциальности</a> · <a href="mailto:finknizhka@yandex.ru">finknizhka@yandex.ru</a></p>
+    <p>Приложение — инструмент учёта. Оно не даёт инвестиционных рекомендаций и не совершает сделок.</p>
+  </footer>
+
+</div>
+</body>
+</html>
